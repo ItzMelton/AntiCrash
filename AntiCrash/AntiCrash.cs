@@ -14,7 +14,7 @@ namespace AntiCrash;
 public class AntiCrash : TerrariaPlugin {
     public override string Name => "AntiCrash";
     public override Version Version => Assembly.GetExecutingAssembly().GetName().Version;
-    public override string Author => "Melton [ Compiled by Nightklp";
+    public override string Author => "Melton [ Compiled by Nightklp ]";
     public override string Description => "A TShock plugin that attempts to prevent various crash exploits.";
     
     public AntiCrash(Main game) : base(game) {
