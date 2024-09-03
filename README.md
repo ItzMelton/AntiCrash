@@ -2,6 +2,6 @@
 A tshock terraria plugin for terraria
 
 # Info
-Block and stop mobile crashes coming from the server such as crashcodes.
+Block and stop crashcodes crashes from the server.
 
-AntiCrash v1.0.8
+AntiCrash v1.0.8 (Latest)
