@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -14,7 +15,7 @@ namespace AntiCrash;
 public class AntiCrash : TerrariaPlugin {
     public override string Name => "AntiCrash";
     public override Version Version => Assembly.GetExecutingAssembly().GetName().Version;
-    public override string Author => "Melton [ Compiled by Nightklp ]";
+    public override string Author => "Melton";
     public override string Description => "A TShock plugin that attempts to prevent various crash exploits.";
 
     public AntiCrash(Main game) : base(game) {
@@ -22,7 +23,6 @@ public class AntiCrash : TerrariaPlugin {
 
     public override void Initialize() {
         ServerApi.Hooks.ServerChat.Register(this, OnChat);
-        ServerApi.Hooks.NetGetData.Register(this, OnGetData);
     }
 
     // called everytime server receives a chat message before being sent to clients
@@ -31,10 +31,6 @@ public class AntiCrash : TerrariaPlugin {
         bool triggered = false;
         if (message.Split(" ").Any(substring => substring.Length >= 50)) { // if sent message contains a substring with length greater than 50
             TShock.Players[args.Who].Kick("Sent a message with excessive substring length", true);
-            triggered = true;
-        }
-        else if (ContainsBadCT(message)) { // if sent message contains a badly formatted ct tag
-            TShock.Players[args.Who].Kick("Badly formatted controls touch tag pattern", true);
             triggered = true;
         }
         if (triggered) {
