@@ -1,9 +1,9 @@
 # AntiCrash
-A Tshock terraria plugin for terraria
+A Tshock terraria plugin that allows to block and stop crashcodes crashes from the server
 
-# Info
-Block and stop crashcodes crashes from the server.
-Best for anarchy servers!
+## How to Install
+Download the .dll file
+Put the `.dll` file inside of `TerrariaPlugin`
 
-# Versions
+## Versions
 AntiCrash v1.0.8 (Latest)
