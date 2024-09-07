@@ -1,1 +1,7 @@
-
+{
+  "Settings": {
+    "Enabled": true,
+    "MaxMessageLength": 50,
+    "AllowAntiCT": true
+  }
+}
