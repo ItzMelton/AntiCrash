@@ -16,7 +16,7 @@ public class AntiCrash : TerrariaPlugin
     public override string Name => "AntiCrash";
     /// The name of the plugin
     
-    public override Version Version => new Version(1, 1, 0);
+    public override Version Version => new Version(1, 1, 2);
     /// The version of the plugin
     
     public override string Author => "Melton";
@@ -32,6 +32,9 @@ public class AntiCrash : TerrariaPlugin
 
     public override void Initialize()
     {
+        ServerApi.Hooks.ServerChat.Register(this, OnChat);
+        ServerApi.Hooks.ServerJoin.Register(this, OnJoin);
+        
         config = new AntiCrashConfigFile();
         /// Create a new config
 
@@ -49,9 +52,6 @@ public class AntiCrash : TerrariaPlugin
         }
 
         if (!config.Settings.Enabled) return;
-        
-        ServerApi.Hooks.ServerChat.Register(this, OnChat);
-        /// Hook the OnChat event
         }
 
     protected override void Dispose(bool disposing)
@@ -59,6 +59,7 @@ public class AntiCrash : TerrariaPlugin
         if (disposing)
         {
             ServerApi.Hooks.ServerChat.Deregister(this, OnChat);
+            ServerApi.Hooks.ServerJoin.Deregister(this, OnJoin);
             config = null;
         }
         
@@ -69,8 +70,8 @@ public class AntiCrash : TerrariaPlugin
     public void OnChat(ServerChatEventArgs args)
     {
         string message = args.Text;
-        bool triggered = false;
         if (args.Handled) return;
+        bool triggered = false;
 
         if (TShock.Players[args.Who] == null) return;
         /// If a player doesn't exist or is null then return
@@ -144,6 +145,16 @@ public class AntiCrash : TerrariaPlugin
         return message.Contains("5456");
         /// Check for exact phrase
         /// return true if it contains the phrase
+    }
+
+    public void OnJoin(JoinEventArgs args)
+    {
+        var player = TShock.Players[args.Who];
+        if (player.Name.Contains("5456"))
+        {
+            player.Kick("Your name contains a bad character! Please change it to something else.", true);
+            /// If the player contains 5456 then kick
+        }
     }
 }
 
