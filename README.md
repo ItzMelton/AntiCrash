@@ -21,7 +21,8 @@ AntiCrash v1.1.0
     }
 }
 ```
-  - so for example I said `ILoveMaxTheGreat`, it will automatically kick me. Yes, you can get kicked if the length is higher than 16
+So for example I said `ILoveMaxTheGreat`, and that is 16 degits, it will automatically kick me. Yes, you can get kicked if the length is higher than 16 or the length you set for `MaxMessageLength`
+- AllowCTTag
 
 
 
