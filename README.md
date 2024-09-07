@@ -3,7 +3,7 @@ A Tshock terraria plugin that allows to block and stop crashcodes from crashing 
 
 ## How to Install
 1. Download the `.dll` file.
-2. Put the `.dll` file inside of `ServerPlugins`
+2. Put the `.dll` file inside of `/ServerPlugins/`
 3. Stop and rerun the server.
 
 ## Versions
