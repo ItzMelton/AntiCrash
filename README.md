@@ -12,8 +12,8 @@ AntiCrash v1.1.0
 
 # Instructions
 ## Configs
-- `Enabled` a bool(true/false) setting for turning the plugin off and on
-- `MaxMessageLength` This is where you set the max length of the plugin, whenever the message has the length or higher than the length of the `MaxMessageLength`, it'll automatically kick you. Exp,
+- `Enabled` bool(true/false), setting for turning the plugin off and on
+- `MaxMessageLength` int(numbers only), This is where you set the max length of the plugin, whenever the message has the length or higher than the length of the `MaxMessageLength`, it'll automatically kick you. Exp,
 ```json
 {
     "Settings": {
@@ -21,8 +21,19 @@ AntiCrash v1.1.0
     }
 }
 ```
-So for example I said `ILoveMaxTheGreat`, and that is 16 degits, it will automatically kick me. Yes, you can get kicked if the length is higher than 16 or the length you set for `MaxMessageLength`
-- AllowCTTag
+So for example I said `ILoveMaxTheGreat`, and that will be 16 degits, it will automatically kick me. Yes, you can get kicked if the length is higher than 16 or the length you set for `MaxMessageLength`
+- `AllowAntiCT` bool(true/false), This is where you turn off and on the anti ct tag setting such as `\[ct:(1|7),(\d*)\]` and `[ct:7,5456]`, This will decrease the protecting from getting crash. I recommended keep this on.
+- Default Settings for `TShock/AntiCrash.json`, You can change it in your own choice (optional)
+```json
+{
+  "Settings": {
+    "Enabled": true,
+    "MaxMessageLength": 50,
+    "AllowAntiCT": true
+  }
+}
+```
+As you can see `Enabled` is on so you don't have to make it on. `MaxMessageLength` max length for the message is set to 50. `AllowAntiCT` is on for extra protecting
 
 
 
