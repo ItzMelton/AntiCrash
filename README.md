@@ -7,7 +7,7 @@ A Tshock terraria plugin that allows to block and stop crashcodes crashes from t
 3. Rerun the server.
 
 ## Versions
-AntiCrash v1.0.8 
+AntiCrash v1.0.8     
 Anti Crash v1.1.0
 
 # Configs
