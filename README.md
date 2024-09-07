@@ -8,7 +8,7 @@ A Tshock terraria plugin that allows to block and stop crashcodes from crashing 
 
 ## Versions
 AntiCrash v1.0.8     
-AntiCrash v1.1.0
+AntiCrash v1.1.0 (Latest)
 
 # Instructions
 ## Configs
@@ -33,7 +33,7 @@ So for example I said `ILoveMaxTheGreat`, and that will be 16 degits, it will au
   }
 }
 ```
-As you can see `Enabled` is on so you don't have to make it on. `MaxMessageLength` max length for the message is set to 50. `AllowAntiCT` is on for extra protecting
+As you can see `Enabled` is on so you don't have to make it on. `MaxMessageLength` max length for the message is set to 50. `AllowAntiCT` is on for extra protecting.
 
 
 
