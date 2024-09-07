@@ -10,7 +10,8 @@ A Tshock terraria plugin that allows to block and stop crashcodes from crashing 
 AntiCrash v1.0.8     
 AntiCrash v1.1.0
 
-# Configs
+# Instructions
+## Configs
 - `Enabled` a bool(true/false) setting for turning the plugin off and on
 - `MaxMessageLength` This is where you set the max length of the plugin, whenever the message has the length or higher than the length of the `MaxMessageLength`, it'll automatically kick you. Exp,
 ```json
@@ -18,7 +19,8 @@ AntiCrash v1.1.0
     "Settings": {
         "MaxMessageLength": 16
     }
-}```
+}
+```
   - so for example I said `ILoveMaxTheGreat`, it will automatically kick me. Yes, you can get kicked if the length is higher than 16
 
 
