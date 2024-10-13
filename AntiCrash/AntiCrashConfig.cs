@@ -1,22 +1,22 @@
+using System.ComponentModel;
 using System.IO;
 using TShockAPI;
-using TShockAPI.Configuration;
+using CommonGround.Configuration;
 /// Config for AntiCrash
 
 namespace AntiCrash
 {
-    public class AntiCrashConfig
+    struct AntiCrashConfig : IPluginConfiguration
     {
-        public static string FilePath = Path.Combine(TShock.SavePath, "AntiCrash.json");
-        /// FilePath of the AntiCrash config file
-        /// TShock/AntiCrash.json
-        
-        public bool Enabled { get; set; } = true;
-        public int MaxMessageLength { get; set; } = 50;
-        public bool AllowAntiCT { get; set; } = true;
-        /// Settings for AntiCrash.json
-    }
+        public string FilePath => Path.Combine(TShock.SavePath, "AntiCrash.json");
 
-    public class AntiCrashConfigFile : ConfigFile<AntiCrashConfig>
-    { }
+        [DefaultValue(true)]
+        public bool Enabled { get; set; }
+
+        [DefaultValue(50)]
+        public int MaxMessageLengthWithoutSpaces { get; set; }
+
+        [DefaultValue(true)]
+        public bool AllowAntiCT { get; set; }
+    }
 }
