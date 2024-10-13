@@ -1,6 +1,8 @@
 # AntiCrash
 A Tshock terraria plugin that allows to block and stop crashcodes from crashing the mobile users and server. Especially players with PC clients can easily crash mobile users using, projectiles etc in a non-protected TShock server and this is why AntiCrash exist.
 
+* Thanks Xavier for trying the plugin and adding it to shifttech!
+
 ## How to Install
 1. Download the `.dll` file.
 2. Put the `.dll` file inside of `/ServerPlugins/`
