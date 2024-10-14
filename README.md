@@ -13,7 +13,7 @@ A Tshock terraria plugin that allows to block and stop crashcodes from crashing 
 [AntiCrash v1.0.8](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.0.8)    
 [AntiCrash v1.1.0](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.0)   
 [AntiCrash v1.1.2](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.2)           
-[AntiCrash v1.1.5] (Pre-release)
+[AntiCrash v1.1.5](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.5) (Latest)
 
 # Instructions
 ## Configs
