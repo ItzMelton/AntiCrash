@@ -1,12 +1,11 @@
 using System;
-using System.Reflection;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.IO;
 using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
 using TShockAPI.Hooks;
+using CommonGround.Configuration;
 
 namespace AntiCrash;
 
@@ -16,7 +15,7 @@ public class AntiCrash : TerrariaPlugin
     public override string Name => "AntiCrash";
     /// The name of the plugin
     
-    public override Version Version => new Version(1, 1, 2);
+    public override Version Version => new Version(1, 1, 5);
     /// The version of the plugin
     
     public override string Author => "Melton";
@@ -25,34 +24,23 @@ public class AntiCrash : TerrariaPlugin
     public override string Description => "A TShock plugin that attempts to prevent various crash exploits.";
     /// The Description of the plugin
 
-    private AntiCrashConfigFile config;
+    private AntiCrashConfig Config;
 
     public AntiCrash(Main game) : base(game)
     { }
 
     public override void Initialize()
     {
+        //Create a new config if one does not exist yet and read them
+        Config = PluginConfiguration.Load<AntiCrashConfig>();
+
         ServerApi.Hooks.ServerChat.Register(this, OnChat);
         ServerApi.Hooks.ServerJoin.Register(this, OnJoin);
-        
-        config = new AntiCrashConfigFile();
-        /// Create a new config
+        TShockAPI.Hooks.GeneralHooks.ReloadEvent += OnReload;
 
-        if (File.Exists(AntiCrashConfig.FilePath)) return;
-        config.Read(AntiCrashConfig.FilePath, out bool fileError);
-        /// Read the values of the config file
-
-        if (fileError)
-        {
-            config.Write(AntiCrashConfig.FilePath);
-            /// Create the file if it doesn't exist
-            
-            TShock.Log.ConsoleError($"[AntiCrash] Missing config file. Generated the config file at {AntiCrashConfig.FilePath}");
-            /// Log that the file was missing.
-        }
-
-        if (!config.Settings.Enabled) return;
-        }
+        if (!Config.Enabled)
+            return;
+    }
 
     protected override void Dispose(bool disposing)
     {
@@ -60,7 +48,7 @@ public class AntiCrash : TerrariaPlugin
         {
             ServerApi.Hooks.ServerChat.Deregister(this, OnChat);
             ServerApi.Hooks.ServerJoin.Deregister(this, OnJoin);
-            config = null;
+            TShockAPI.Hooks.GeneralHooks.ReloadEvent -= OnReload;
         }
         
         base.Dispose(disposing);
@@ -69,15 +57,17 @@ public class AntiCrash : TerrariaPlugin
     /// called everytime server receives a chat message before being sent to clients
     public void OnChat(ServerChatEventArgs args)
     {
+        if (args.Handled)
+            return;
+
         string message = args.Text;
-        if (args.Handled) return;
         bool triggered = false;
 
         if (TShock.Players[args.Who] == null) return;
         /// If a player doesn't exist or is null then return
         /// This is to prevent error when a player doesn't exist.
         
-        if (message.Split(" ").Any(substring => substring.Length >= config.Settings.MaxMessageLength))
+        if (message.Split(" ").Any(substring => substring.Length >= Config.MaxMessageLengthWithoutSpaces))
         {
             TShock.Players[args.Who].Kick("Sent a message with excessive substring length", true);
             /// If sent a message contains a substring with length greater than 50
@@ -88,7 +78,8 @@ public class AntiCrash : TerrariaPlugin
         }
         else if (ContainsBadCT(message))
         {
-            if (!config.Settings.AllowAntiCT) return;
+            if (!Config.AllowAntiCT) 
+                return;
             TShock.Players[args.Who].Kick("Badly formatted controls touch tag pattern", true);
             /// Else if the message contains a bad character: @"\[ct:(1|7),(\d*)\]
             /// This is the second blocker for blocking long and cted messages
@@ -98,7 +89,8 @@ public class AntiCrash : TerrariaPlugin
         }
         else if (ShortBadCT(message))
         {
-            if (!config.Settings.AllowAntiCT) return;
+            if (!Config.AllowAntiCT) 
+                return;
             TShock.Players[args.Who].Kick("Badly short formatted ct tag pattern", true);
             /// Else if the message has a short CT: [ct:7,5456]
             /// This is for blocking short cted messages
@@ -131,7 +123,6 @@ public class AntiCrash : TerrariaPlugin
             int itemID;
             if (int.TryParse(itemIDstring, out itemID))
             {
-                
                 if (itemID < 0 || itemID >= 5456)
                 {
                     return true;
@@ -154,6 +145,22 @@ public class AntiCrash : TerrariaPlugin
         {
             player.Kick("Your name contains a bad character! Please change it to something else.", true);
             /// If the player contains 5456 then kick
+        }
+    }
+
+    public void OnReload(ReloadEventArgs args)
+    {
+        Config = PluginConfiguration.Load<AntiCrashConfig>();
+
+        if (!Config.Enabled)
+        {
+            ServerApi.Hooks.ServerChat.Deregister(this, OnChat);
+            ServerApi.Hooks.ServerJoin.Deregister(this, OnJoin);
+        }
+        else
+        {
+            ServerApi.Hooks.ServerChat.Register(this, OnChat);
+            ServerApi.Hooks.ServerJoin.Register(this, OnJoin);
         }
     }
 }
