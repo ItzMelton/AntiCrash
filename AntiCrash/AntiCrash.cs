@@ -80,7 +80,7 @@ public class AntiCrash : TerrariaPlugin
         }
 
         /// Detecting short message crashcodes
-        /// projectiles crash ()
+        // projectiles crash (5456)
         else if (ShortBadCT(message))
         {
             if (!Config.AllowAntiCT) 
