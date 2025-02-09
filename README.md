@@ -1,8 +1,9 @@
 # AntiCrash
-A Tshock terraria plugin that allows to block and stop crashcodes from crashing the mobile users and server. Especially players with PC clients can easily crash mobile users using, projectiles etc in a non-protected TShock server and that is why AntiCrash exist.
+A Tshock terraria plugin blocking crashcodes or clients for crashing mobile players and rarely pc (advanced crashes). 
 
-* Thanks Xavier for trying the plugin and adding it to shifttech!
-* Thanks to `Sors` for fixing the major bug for v1.1.5
+
+## Special Thanks
+* Thanks to `Sors` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
 
 ## How to Install
 1. Download the `.dll` file.
@@ -17,8 +18,8 @@ A Tshock terraria plugin that allows to block and stop crashcodes from crashing 
 
 # Instructions
 ## Configs
-- `Enabled` bool(true/false), setting for turning the plugin off and on
-- `MaxMessageLengthWithoutSpaces` int(numbers only), This is where you set the max length of the plugin, whenever the message has the length or higher than the length of the `MaxMessageLengthWithoutSpaces`, it'll automatically kick you. Exp,
+- `Enabled` (bool), Enable/Disable the plugin
+- `MaxMessageLengthWithoutSpaces` (int), Setting the max message length for the plugin, Recommended max message length 50 or higher, lowering the max length will decrease its accuracy. Whenever the message has the length or higher than the length of your desired max length, it will automatically kick you. Exp,
 ```json
 {
     "Settings": {
@@ -26,9 +27,9 @@ A Tshock terraria plugin that allows to block and stop crashcodes from crashing 
     }
 }
 ```
-So for example I said `ILoveMaxTheGreat`, and that will be 16 degits, it will automatically kick me. Yes, you can get kicked if the length is higher than 16 or the length you set for `MaxMessageLengthWithoutSpaces`
-- `AllowAntiCT` bool(true/false), This is where you turn off and on the anti ct tag setting such as `\[ct:(1|7),(\d*)\]` and `[ct:7,5456]`, This will decrease the protecting from getting crash. I recommended keep this on.
-- Default Settings for `tshock/AntiCrash.json`, You can change it in your own choice (optional)
+Quick Example : Some random dude said `ILoveMaxTheGreat` in the chat, and that will be about 16 degits, it will be expected to automatically kick that person out of that server he is in. He can get kicked if the length is higher than 16 or the length you set for `MaxMessageLengthWithoutSpaces`
+- `AllowAntiCT` (bool), Enable/Disable anti ct tag detectors containing symboled or some kind of projectiles messages, This will decrease the chances from getting crashed. I recommended keep this on.
+- `tshock/AntiCrash.json` Default settings, You can change it to your own desire.
 ```json
 {
   "Settings": {
@@ -38,4 +39,6 @@ So for example I said `ILoveMaxTheGreat`, and that will be 16 degits, it will au
   }
 }
 ```
-As you can see `Enabled` is on so you don't have to make it on. `MaxMessageLengthWithoutSpaces` max length for the message is set to 50. `AllowAntiCT` is on for extra protecting.
+`Enabled` is on so you don't have to make it on. `MaxMessageLengthWithoutSpaces` max length is set to 50. `AllowAntiCT` is enabled.
+
+I appreciate and thank for those who uses my plugins!
