@@ -1,8 +1,7 @@
 using System.ComponentModel;
 using System.IO;
 using TShockAPI;
-using CommonGround.Configuration;
-/// Config for AntiCrash
+using CommonGround.Configuration
 
 namespace AntiCrash
 {
