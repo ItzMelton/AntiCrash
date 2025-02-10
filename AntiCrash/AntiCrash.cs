@@ -13,11 +13,11 @@ namespace AntiCrash;
 public class AntiCrash : TerrariaPlugin
 {
     public override string Name => "AntiCrash";
-    
+
     public override Version Version => new Version(1, 1, 5);
-    
+
     public override string Author => "Melton";
-    
+
     public override string Description => "A TShock plugin that attempts to prevent various crash exploits.";
 
     private AntiCrashConfig Config;
@@ -46,7 +46,7 @@ public class AntiCrash : TerrariaPlugin
             ServerApi.Hooks.ServerJoin.Deregister(this, OnJoin);
             TShockAPI.Hooks.GeneralHooks.ReloadEvent -= OnReload;
         }
-        
+
         base.Dispose(disposing);
     }
 
@@ -65,17 +65,17 @@ public class AntiCrash : TerrariaPlugin
         if (message.Split(" ").Any(substring => substring.Length >= Config.MaxMessageLengthWithoutSpaces))
         {
             TShock.Players[args.Who].Kick("Sent a message with excessive substring length", true);
-    
+
             triggered = true;
         }
-        
+
         /// Detecting symboled messages 
         else if (ContainsBadCT(message))
         {
-            if (!Config.AllowAntiCT) 
+            if (!Config.AllowAntiCT)
                 return;
             TShock.Players[args.Who].Kick("Badly formatted controls touch tag pattern", true);
-        
+
             triggered = true;
         }
 
@@ -83,18 +83,65 @@ public class AntiCrash : TerrariaPlugin
         // projectiles crash (5456)
         else if (ShortBadCT(message))
         {
-            if (!Config.AllowAntiCT) 
-                return;
+            if (!Config.AllowAntiCT) return;
             TShock.Players[args.Who].Kick("Badly short formatted ct tag pattern", true);
-            
+
             triggered = true;
         }
-        
+
         if (triggered)
         {
             args.Handled = true;
         }
     }
+
+    public void OnNetGetData(GetDataEventArgs args)
+    {
+        PacketTypes MsgID = args.MsgID;
+
+        /// When a chest is opened
+        if (MsgID == PacketTypes.ChestOpen)
+        {
+            if (args.Handled) return;
+            using (BinaryReader br = new(new MemoryStream(args.Msg.readBuffer, args.Index, args.Length)))
+            { 
+                int chestID = br.ReadInt16(); // Chest ID
+                br.ReadInt16(); // Chest x (unused)
+                br.ReadInt16(); // Chest y (unused)
+                byte nameLength = br.ReadByte(); // Name length
+                string chestName = br.ReadString(); // Chest name
+
+                TSPlayer player = TShock.Players[args.Msg.whoAmI];
+
+                if (chestID == -1)
+                {
+                    int id = player.TPlayer.chest;
+                    if (id < 0 || id >= Main.chest.Length || Main.chest[id] == null) return;
+
+                    Chest chest = Main.chest[id];
+
+                    if (chestName.Contains("5456"))
+                    {
+                        if (nameLength != 0) return;
+
+                        
+                        /// Set the chest name to default
+                        chest.name = string.Empty;
+                        NetMessage.SendData((int)PacketTypes.ChestName, -1, -1, null, id, chest.x, chest.y)
+
+                        player.SendErrorMessage("The chest you renamed have been reset to default.");
+                        TShock.Log.ConsoleInfo($"[AntiCrash] Player {player.Name} renamed a chest containing a crash code at ({chest.x}, {chest.y})");
+                    }
+                    else
+                    {
+                        TShock.Log.ConsoleInfo($"[AntiCrash] Checked player {player.Name}'s rename for the chest at ({chest.x}, {chest.y})");
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     private static bool ContainsBadCT(string message)
     {
         string ctPattern = @"\[ct:(1|7),(\d*)\]";
@@ -135,6 +182,11 @@ public class AntiCrash : TerrariaPlugin
         }
     }
 
+    private static bool HasEnoughData(BinaryReader br, int requiredBytes)
+    {
+        return br.BaseStream.Length - br.BaseStream.Position >= requiredBytes;
+    }
+
     public void OnReload(ReloadEventArgs args)
     {
         Config = PluginConfiguration.Load<AntiCrashConfig>();
@@ -151,7 +203,6 @@ public class AntiCrash : TerrariaPlugin
         }
     }
 }
-
 /// If you want to contact me, here's my information!
 /// Discord: itzmelton (Melton)
 /// Github: https://github.com/ItzMelton
