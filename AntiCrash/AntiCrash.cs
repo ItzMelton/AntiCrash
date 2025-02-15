@@ -203,6 +203,7 @@ public class AntiCrash : TerrariaPlugin
         }
     }
 }
+
 /// If you want to contact me, here's my information!
 /// Discord: itzmelton (Melton)
 /// Github: https://github.com/ItzMelton
