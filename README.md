@@ -1,9 +1,5 @@
 # AntiCrash
-A Tshock terraria plugin blocking crashcodes or clients for crashing mobile players and rarely pc (advanced crashes). 
-
-
-## Special Thanks
-* Thanks to `Sors` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
+A Tshock terraria plugin blocking crashcodes or clients for crashing mobile players and rarely pc (advanced crashes).
 
 ## How to Install
 1. Download the `.dll` file.
@@ -40,6 +36,9 @@ Quick Example : Some random dude said `ILoveMaxTheGreat` in the chat, and that w
 }
 ```
 `Enabled` is on so you don't have to make it on. `MaxMessageLengthWithoutSpaces` max length is set to 50. `AllowAntiCT` is enabled.
+
+## Special Thanks
+* Thanks to `Sors` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
 
 ### Extra
 `AntiCrash/Configuration.cs` File credit goes to https://github.com/brianide/CommonGround                         
