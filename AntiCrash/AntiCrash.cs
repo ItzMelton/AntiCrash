@@ -182,11 +182,6 @@ public class AntiCrash : TerrariaPlugin
         }
     }
 
-    private static bool HasEnoughData(BinaryReader br, int requiredBytes)
-    {
-        return br.BaseStream.Length - br.BaseStream.Position >= requiredBytes;
-    }
-
     public void OnReload(ReloadEventArgs args)
     {
         Config = PluginConfiguration.Load<AntiCrashConfig>();
