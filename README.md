@@ -30,7 +30,7 @@ A Tshock terraria plugin blocking crashcodes or clients for crashing mobile play
 ```
 
 # Special Thanks
-* Thanks to `Sors` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
+* Thanks to `Sors89` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
 
 ## Extra
 `AntiCrash/Configuration.cs` File credit goes to https://github.com/brianide/CommonGround                         
