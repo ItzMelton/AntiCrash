@@ -15,10 +15,10 @@ A Tshock terraria plugin blocking crashcodes or clients for crashing mobile play
 # Instructions
 ## Configs
 - `Enabled` (bool), Enable/Disable the plugin
-- `MaxMessageLengthWithoutSpaces` (int), Setting the max message length for the plugin, Recommended max message length 50 or higher, lowering the max length will decrease its accuracy. Whenever the message has the length or higher than the length of your desired max length, it will automatically kick you. Exp,
-```json
-- `AllowAntiCT` (bool), Enable/Disable anti ct tag detectors containing symboled or projectiles messages, This will decrease the chances from getting crashed.
-- `tshock/AntiCrash.json` Default settings, You can change it to your own desire.
+- `MaxMessageLengthWithoutSpaces` (int), Setting the max message length for the plugin, Recommended max message length 50 or higher, lowering the max length will decrease its effect. Whenever the message has the length or higher than the length of your desired max length, it will automatically kick you. Exp,
+
+- `AllowAntiCT` (bool), Enable/Disable anti ct tag detectors containing symboled or projectiles messages.
+- `tshock/AntiCrash.json` Default settings, You can change it to whatever you want.
 ```json
 {
   "Settings": {
@@ -26,7 +26,7 @@ A Tshock terraria plugin blocking crashcodes or clients for crashing mobile play
     "MaxMessageLengthWithoutSpaces": 50,
     "AllowAntiCT": true
   }
-}
+}```
 
 # Special Thanks
 * Thanks to `Sors` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
