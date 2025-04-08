@@ -27,6 +27,7 @@ A Tshock terraria plugin blocking crashcodes or clients for crashing mobile play
     "AllowAntiCT": true
   }
 }
+```
 
 # Special Thanks
 * Thanks to `Sors` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
