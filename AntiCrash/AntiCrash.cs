@@ -109,8 +109,7 @@ public class AntiCrash : TerrariaPlugin
                 br.ReadInt16(); // Chest x (unused)
                 br.ReadInt16(); // Chest y (unused)
                 byte nameLength = br.ReadByte(); // Name length
-                //We will not read chest name if the nameLength of the chest is 0
-                string chestName = (nameLength == 0) ? string.Empty : br.readString(); // Chest name
+                string chestName = br.ReadString(); // Chest name
 
                 TSPlayer player = TShock.Players[args.Msg.whoAmI];
 
@@ -123,6 +122,9 @@ public class AntiCrash : TerrariaPlugin
 
                     if (chestName.Contains("5456"))
                     {
+                        if (nameLength != 0) return;
+
+                        
                         /// Set the chest name to default
                         chest.name = string.Empty;
                         NetMessage.SendData((int)PacketTypes.ChestName, -1, -1, null, id, chest.x, chest.y)
