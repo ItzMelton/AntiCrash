@@ -67,7 +67,7 @@ public class AntiCrash : TerrariaPlugin
         if (TShock.Players[args.Who] == null) 
             return;
 
-        // Detecting long messages (Recommended max message 50 or higher, lower will effect its accuracy)
+        // Detecting long messages (Recommended max message 50 or higher)
         if (message.Split(" ").Any(substring => substring.Length >= Config.MaxMessageLengthWithoutSpaces))
         {
             TShock.Players[args.Who].Kick("Sent a message with excessive substring length", true);
@@ -146,10 +146,10 @@ public class AntiCrash : TerrariaPlugin
                         player.SendErrorMessage("The chest you renamed has been reset to default.");
                         TShock.Log.ConsoleWarn($"[AntiCrash] Player {player.Name} renamed a chest containing a crash code at ({chest.x}, {chest.y})");
 
-                        //IMPORTANT!!! Do not delete this line or the name of the chest will reset back to crash code once you leave the server.
-                        //This happens because NetGetData hook is called before Terraria's packet handling, that means if we don't put this line here
-                        //Terraria will continue its default behaviour and handle the chest so our effort changing the name of the chest would mean nothing.
-                        //This stops Terraria from handling the chest so the chest won't be updated one more time by Terraria.
+                        // IMPORTANT!!! Do not delete this line or the name of the chest will reset back to crash code once you leave the server.
+                        // This happens because NetGetData hook is called before Terraria's packet handling, that means if we don't put this line here
+                        // Terraria will continue its default behaviour and handle the chest so our effort changing the name of the chest would mean nothing.
+                        // This stops Terraria from handling the chest so the chest won't be updated one more time by Terraria.
                         args.Handled = true;
                     }
                 }
