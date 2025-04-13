@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.IO;
 using TShockAPI;
-using CommonGround.Configuration
+using CommonGround.Configuration;
 
 namespace AntiCrash
 {
@@ -10,12 +10,12 @@ namespace AntiCrash
         public string FilePath => Path.Combine(TShock.SavePath, "AntiCrash.json");
 
         [DefaultValue(true)]
-        public bool Enabled { get; set; }
+        public bool Enabled { get; private set; }
 
         [DefaultValue(50)]
-        public int MaxMessageLengthWithoutSpaces { get; set; }
+        public int MaxMessageLengthWithoutSpaces { get; private set; }
 
         [DefaultValue(true)]
-        public bool AllowAntiCT { get; set; }
+        public bool AllowAntiCT { get; private set; }
     }
 }
