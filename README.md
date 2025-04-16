@@ -1,8 +1,8 @@
 # AntiCrash
-A Tshock terraria plugin that blocks crashcodes or clients that crash mobile players
+A TShock plugin that attempts to prevent various crash exploits
 
 ## Installation
-1. Download the `.dll` file.
+1. Download the `Anticrash.dll` file.
 2. Put the `.dll` file inside of `/ServerPlugins/`
 3. Stop and rerun the server.
 
