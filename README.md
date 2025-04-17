@@ -11,6 +11,7 @@ A TShock plugin that attempts to prevent various crash exploits
 [AntiCrash v1.1.0](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.0)   
 [AntiCrash v1.1.2](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.2)           
 [AntiCrash v1.1.5](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.5) (Latest)
+[AntiCrash v1.1.6](https://github.com/ItzMelton/AntiCrash/releases/tag/v1.1.6) (Pre-release)
 
 # Instructions
 ## Configs
