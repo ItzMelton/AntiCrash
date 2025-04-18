@@ -103,56 +103,57 @@ public class AntiCrash : TerrariaPlugin
     {
         PacketTypes MsgID = args.MsgID;
 
+        // When a chest is opened
+        if (args.Handled) 
+            return;
+        
+        TSPlayer player = TShock.Players[args.Msg.whoAmI];
+        
+        if(player.State < 10)
+            return;
+        
         using (BinaryReader br = new(new MemoryStream(args.Msg.readBuffer, args.Index, args.Length)))
-        {
-            // When a chest is opened
-            if (MsgID == PacketTypes.ChestOpen)
+        { 
+            switch (args.MsgID)
             {
-                if (args.Handled) 
+                case PacketTypes.ChestOpen:
+                    ChestOpen(player, br);
+                    args.Handled = true;
                     return;
+            }
+        }
+    }
 
-                int chestID = br.ReadInt16();
-                br.ReadInt16(); // X
-                br.ReadInt16(); // Y
-                byte nameLength = br.ReadByte();
-                
-                string chestName = string.Empty;
-                if (nameLength != 0)
-                {
-                    if (nameLength <= 20)
-                    chestName = br.ReadString();
-                    else if (nameLength != 255)
-                    nameLength = 0;
-                }
+    private void ChestOpen(TSPlayer player, BinaryReader br)
+    {
+        int chestID = br.ReadInt16();
+        br.ReadInt16();
+        br.ReadInt16();
+        byte nameLength = br.ReadByte();
+        string chestName = string.Empty;
+        if (nameLength != 0)
+        {
+            if (nameLength <= 20)
+                chestName = br.ReadString();
+            else if (nameLength != 255)
+                nameLength = 0;
+        }
 
-                TSPlayer player = TShock.Players[args.Msg.whoAmI];
+        if (chestID == -1)
+        {
+            int id = player.TPlayer.chest;
+            if (id < 0 || id >= Main.chest.Length || Main.chest[id] == null) 
+                return;
 
-                // When player closes the chest
-                if (chestID == -1)
-                {
-                    // Get the current chest that player is interacting
-                     int id = player.TPlayer.chest;
-                     if (id < 0 || id >= Main.chest.Length || Main.chest[id] == null) 
-                        return;
+            Chest chest = Main.chest[id];
 
-                    Chest chest = Main.chest[id];
+            if (ShortBadCT(chestName))
+            {
+                chest.name = string.Empty;
+                TSPlayer.All.SendData(PacketTypes.ChestName, "", id, chest.x, chest.y);
 
-                    if (ShortBadCT(chestName))
-                    {
-                        // Set the chest name to default
-                        chest.name = string.Empty;
-                        TSPlayer.All.SendData(PacketTypes.ChestName, "", id, chest.x, chest.y);
-
-                        player.SendErrorMessage("The chest you renamed has been reset to default.");
-                        TShock.Log.ConsoleWarn($"[AntiCrash] Player {player.Name} renamed a chest containing a crash code at ({chest.x}, {chest.y})");
-
-                        // IMPORTANT!!! Do not delete this line or the name of the chest will reset back to crash code once you leave the server.
-                        // This happens because NetGetData hook is called before Terraria's packet handling, that means if we don't put this line here
-                        // Terraria will continue its default behaviour and handle the chest so our effort changing the name of the chest would mean nothing.
-                        // This stops Terraria from handling the chest so the chest won't be updated one more time by Terraria.
-                        args.Handled = true;
-                    }
-                }
+                player.SendErrorMessage("The chest you renamed has been reset to default.");
+                TShock.Log.ConsoleWarn($"[AntiCrash] Player {player.Name} renamed a chest containing a crash code at ({chest.x}, {chest.y})");
             }
         }
     }
