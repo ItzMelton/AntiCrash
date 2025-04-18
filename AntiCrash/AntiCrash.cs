@@ -102,7 +102,7 @@ public class AntiCrash : TerrariaPlugin
     {
         PacketTypes MsgID = args.MsgID;
 
-        if (args.Handled) 
+        if (args.Handled)
             return;
         
         TSPlayer player = TShock.Players[args.Msg.whoAmI];
@@ -115,6 +115,9 @@ public class AntiCrash : TerrariaPlugin
             switch (args.MsgID)
             {
                 case PacketTypes.ChestOpen:
+                    if (!Config.AllowAntiCT)
+                        return;
+                        
                     ChestOpen(player, br);
                     args.Handled = true;
                     return;
