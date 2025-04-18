@@ -102,7 +102,6 @@ public class AntiCrash : TerrariaPlugin
     {
         PacketTypes MsgID = args.MsgID;
 
-        // When a chest is opened
         if (args.Handled) 
             return;
         
