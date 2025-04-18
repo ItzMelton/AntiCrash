@@ -30,7 +30,7 @@ A TShock plugin that attempts to prevent various crash exploits
 ```
 
 # Special Thanks
-* Thanks to `Sors89` for fixing the major issues with version v1.1.2 (Patched version : v1.1.5)
+* Thanks to `Sors89` for fixing the major issues
 
 ## Extra
 `AntiCrash/Configuration.cs` File credit goes to https://github.com/brianide/CommonGround                         
