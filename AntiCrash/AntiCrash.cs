@@ -15,7 +15,7 @@ public class AntiCrash : TerrariaPlugin
 {
     public override string Name => "AntiCrash";
 
-    public override Version Version => new Version(1, 1, 6);
+    public override Version Version => new Version(1, 1, 5, 4);
 
     public override string Author => "Melton";
 
