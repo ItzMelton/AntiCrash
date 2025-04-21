@@ -1,13 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp6.0</TargetFramework>
-		<StartupObject>Program</StartupObject>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TShock" Version="5.2.0" />
+    <PackageReference> Include="Tshock" Version="5.2.3" />
   </ItemGroup>
 
 </Project>
