@@ -21,9 +21,9 @@ A TShock plugin that attempts to prevent various crash exploits
 
 `AllowAntiCT`: Enables or disables detection of crash-related messages, such as those containing special symbols or projectiles.
 
-**Default Configuration File**
-Location: `TShock/AntiCrash.json`
-You may customize these settings to your preference.
+**Default Configuration File**                         
+Location: `TShock/AntiCrash.json`                        
+You may customize these settings to your preference.                         
 ```json
 {
   "Settings": {
