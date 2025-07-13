@@ -35,8 +35,8 @@ You may customize these settings to your preference.
 ```
 
 # Special Thanks
-* Thanks to `Sors89` for fixing the major issues
+* Thanks to `Sors89` for fixing major issues.
 
 ## Extra
-`AntiCrash/Configuration.cs` File credit goes to https://github.com/brianide/CommonGround                         
-I appreciate and thank for those who uses my plugins!
+The `AntiCrash/Configuration.cs` File credited goes to https://github.com/brianide/CommonGround                         
+Thank you to everyone who uses and supports my plugins!
