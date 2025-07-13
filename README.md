@@ -15,11 +15,15 @@ A TShock plugin that attempts to prevent various crash exploits
 
 # Instructions
 ## Configs
-- `Enabled` (bool), Enable/Disable the plugin
-- `MaxMessageLengthWithoutSpaces` (int), Setting the max message length for the plugin, Recommended max message length 50 or higher, lowering the max length will decrease its effect. Whenever the message has the length or higher than the length of the max length, it will automatically kick you.
+`Enabled`: Enables or disables the plugin.
 
-- `AllowAntiCT` (bool), Enable/Disable anti ct tag detectors containing symboled or projectiles messages.
-- `Tshock/AntiCrash.json` Default settings, You can change it to whatever you want.
+`MaxMessageLengthWithoutSpaces`: Sets the maximum allowed message length (excluding spaces). It is recommended to set this to 50 or higher. Lowering this value reduces the plugin's effectiveness. If a message exceeds the specified limit, the sender will be automatically kicked.
+
+`AllowAntiCT`: Enables or disables detection of crash-related messages, such as those containing special symbols or projectiles.
+
+**Default Configuration File**
+Location: `TShock/AntiCrash.json`
+You may customize these settings to your preference.
 ```json
 {
   "Settings": {
